@@ -1,8 +1,9 @@
 package com.chimyrys;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
-
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         String filename = "text.txt";
@@ -48,6 +49,7 @@ public class Main {
         return scanner.nextInt();
     }
     public static void processEnter(int enter, int[] ints) {
+        LocalDateTime startTime = LocalDateTime.now();
         switch (enter) {
             case 1:
                 Set<Integer> set = new HashSet<>();
@@ -70,6 +72,9 @@ public class Main {
                 break;
             case 4:
                 System.out.println("Quit");
+                LocalDateTime quitTime = LocalDateTime.now();
+                long seconds = ChronoUnit.SECONDS.between(startTime, quitTime);
+                System.out.println("Session time " + seconds);
                 break;
         }
     }
