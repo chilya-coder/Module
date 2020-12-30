@@ -48,6 +48,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+
     public static void processEnter(int enter, int[] ints) {
         LocalDateTime startTime = LocalDateTime.now();
         switch (enter) {
@@ -75,7 +76,18 @@ public class Main {
                 LocalDateTime quitTime = LocalDateTime.now();
                 long seconds = ChronoUnit.SECONDS.between(startTime, quitTime);
                 System.out.println("Session time " + seconds);
+                try(FileWriter writer = new FileWriter("file.txt", false))
+                {
+                    writer.write((int) seconds);
+                    writer.append('\n');
+                    writer.flush();
+                }
+                catch(IOException ex){
+
+                    System.out.println(ex.getMessage());
+                }
                 break;
         }
+        }
     }
-}
+
